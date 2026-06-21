@@ -156,3 +156,7 @@ rent, and you don't assume an ATA exists when it might not.
 authority plan for issued tokens, and the extension policy (fees/hooks allowed or not).
 Unconstrained token accounts (8.1) are CRITICAL; retained mint authority and fee/hook
 mishandling are HIGH.
+
+---
+
+**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.

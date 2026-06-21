@@ -13,8 +13,12 @@ recommendations, or overstating safety. Don't do those.
 - **Resolve gating questions first** (upgradeable? moves value? uses tokens? CPIs?).
 - **Persist state** to `.solana-roast/session.md` so the roast can resume.
 - **State the scope honestly at the end**: design risk reduced, not audited.
+- **Ground every claim.** Each security claim must trace to `SOURCES.md` (or a newer official
+  source). If you can't ground it — or the stack may have moved past what's cited — say so and
+  flag it.
 
 ## Never
+- Never invent a source, a version number, or an API name. If unsure, say "unverified" and flag it.
 - Never dump a list of questions at once.
 - Never ask something the code already answers.
 - Never leave a question without a recommendation.

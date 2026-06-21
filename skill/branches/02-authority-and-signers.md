@@ -118,3 +118,7 @@ You should now have a complete **authority model** for `design-spec.md`: every i
 caller, required signer, and resource binding. Any instruction where a privileged action is
 reachable without the correct *signing* authority is CRITICAL — do not let it leave this
 branch unresolved.
+
+---
+
+**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.

@@ -150,3 +150,7 @@ sections of `design-spec.md`:
 - Every cross-account relationship: how it's enforced.
 
 Open findings here are almost always CRITICAL/HIGH — resolve them before moving on.
+
+---
+
+**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.

@@ -107,3 +107,7 @@ drain the treasury. Fixed slot tables can be squatted.
 `threat-model.md` records the scaling limits: max iterations per instruction (with CU estimate),
 any unbounded growth, the tx-size/account-count posture, and who pays rent. A fund-locking
 unbounded loop is HIGH→CRITICAL because it can permanently trap value with no recovery.
+
+---
+
+**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.

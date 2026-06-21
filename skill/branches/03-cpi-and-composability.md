@@ -122,3 +122,7 @@ balance-delta read.
 For `design-spec.md`, record: every external program called (with pinned ID), every PDA used
 as a CPI signer (with its scoped seeds), and the state-mutation ordering guarantee. Unverified
 target program IDs are CRITICAL.
+
+---
+
+**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.

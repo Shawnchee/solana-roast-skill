@@ -103,3 +103,7 @@ a censorship/lock vector — get the asymmetry right.
 state), the admin blast-radius table, multisig/timelock coverage, and the pause design. A live
 single-key upgrade authority on a value-holding mainnet program is CRITICAL — it dominates the
 risk profile regardless of how clean the code is.
+
+---
+
+**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.

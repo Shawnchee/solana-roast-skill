@@ -165,7 +165,9 @@ they consume, at the design stage they can't reach.
 
 ## Sources & grounding
 
-The interrogation tree is built from canonical Solana security references:
+Every check traces to a primary, authoritative source. The full per-branch mapping lives in
+**[SOURCES.md](SOURCES.md)** (and each branch file links to it); the skill is instructed not to
+assert anything it can't ground there or in a newer official source. Headline references:
 - [Helius — A Hitchhiker's Guide to Solana Program Security](https://www.helius.dev/blog/a-hitchhikers-guide-to-solana-program-security)
 - [Zealynx — Solana Security Guide: 45 Exploit Checks](https://www.zealynx.io/blogs/solana-security-checklist)
 - [Solana Program Security Checklist: 14 Critical Checks Before Mainnet](https://dev.to/ohmygod/solana-program-security-checklist-14-critical-checks-before-you-deploy-to-mainnet-2d66)

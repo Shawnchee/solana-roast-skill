@@ -1,0 +1,25 @@
+[package]
+name = "vulnerable-vault"
+version = "0.1.0"
+description = "INTENTIONALLY VULNERABLE demo program for the solana-roast skill. DO NOT DEPLOY."
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "vulnerable_vault"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+
+[dependencies]
+anchor-lang = "1.0.2"
+anchor-spl = "1.0.2"
+
+# VULN-2 / VULN-3 (branch 5.2): overflow checks OFF — the release default. This is
+# exactly why bare +/- on balances is dangerous. A safe program sets this to true.
+[profile.release]
+overflow-checks = false

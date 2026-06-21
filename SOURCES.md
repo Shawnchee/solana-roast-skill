@@ -77,6 +77,31 @@ Solana 3.x, mid-2026).
 - `anchor-spl` `token_interface` (`InterfaceAccount`, `Interface<TokenInterface>`) — https://docs.rs/anchor-spl/latest/anchor_spl/ · https://www.anchor-lang.com/docs/tokens/extensions
 - `transfer_checked` vs deprecated `Transfer` (Token-2022) — https://docs.rs/spl-token-2022/latest/spl_token_2022/instruction/index.html
 
+## Branch 9 — Client & Integration Boundary
+
+- Blind signing & wallet transaction simulation (Phantom/Blowfish) — https://www.ledger.com/academy/cryptos-greatest-weakness-blind-signing-explained · https://www.coinspect.com/blog/transaction-simulation-challenges/
+- Sign-In With Solana (SIWS) standard & `verifySignIn` — https://github.com/phantom/sign-in-with-solana · https://phantom.com/learn/developers/sign-in-with-solana · https://siws.web3auth.io/spec
+- RPC is the read path; chain is source of truth; enforce invariants on-chain — https://solana.com/docs/core/accounts · https://solana.com/docs/rpc
+- Backend fee-payer / relayer validation (Kora, Octane, Circle Gas Station) — https://github.com/solana-foundation/kora · https://github.com/anza-xyz/octane · https://www.circle.com/blog/how-circles-gas-station-uses-fee-payers-to-enable-gasless-transactions-on-solana
+- Blockhash expiry & transaction confirmation — https://solana.com/developers/guides/advanced/confirmation
+- Durable nonces — https://solana.com/docs/core/transactions/durable-nonces · https://docs.anza.xyz/implemented-proposals/durable-tx-nonces
+- Durable-nonce abuse (Drift, ~$285M, Apr 2026) — https://www.chainalysis.com/blog/lessons-from-the-drift-hack/ · https://www.coindesk.com/tech/2026/04/02/how-a-solana-feature-designed-for-convenience-let-an-attacker-drain-usd270-million-from-drift
+
+## Exploit library (teaching precedents)
+
+Full table with amounts, dates, root causes, and branch mapping in
+[skill/exploit-library.md](skill/exploit-library.md). Primary sources per entry:
+- Wormhole — https://www.halborn.com/blog/post/explained-the-wormhole-hack-february-2022
+- Cashio — https://www.halborn.com/blog/post/explained-the-cashio-hack-march-2022
+- Crema Finance — https://www.coindesk.com/tech/2022/07/04/solana-defi-protocol-crema-loses-88m-in-exploit
+- Nirvana Finance — https://ackee.xyz/blog/2022-solana-hacks-explained-nirvana/
+- Mango Markets — https://www.cftc.gov/PressRoom/PressReleases/8647-23
+- Solend (USDH) — https://www.coindesk.com/business/2022/11/02/defi-protocol-solend-struck-by-126m-oracle-exploit
+- Raydium (admin key) — https://raydium.medium.com/detailed-post-mortem-and-next-steps-d6d6dd461c3e
+- Cypher Protocol — https://www.halborn.com/blog/post/explained-the-cypher-protocol-hack-august-2023
+- Loopscale — https://rekt.news/loopscale-rekt
+- Drift Protocol — https://www.chainalysis.com/blog/lessons-from-the-drift-hack/
+
 ## Testing & toolchain (interrogation protocol)
 
 - LiteSVM (fast unit tests) — https://github.com/LiteSVM/litesvm

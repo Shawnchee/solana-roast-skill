@@ -83,25 +83,42 @@ ordering below is the recommended dependency order.
 | 6 | [branches/06-upgrade-and-governance.md](branches/06-upgrade-and-governance.md) | Always before mainnet | Live upgrade authority, single-key admin, mutability, multisig/timelock gaps |
 | 7 | [branches/07-compute-and-dos.md](branches/07-compute-and-dos.md) | Loops, lists, or growth | CU exhaustion, unbounded iteration, tx-size limits, account-griefing DoS |
 | 8 | [branches/08-tokens-spl-2022.md](branches/08-tokens-spl-2022.md) | Program touches tokens | Mint/freeze authority, ATA spoofing, Token-2022 hooks/fees, decimals confusion |
+| 9 | [branches/09-client-and-integration.md](branches/09-client-and-integration.md) | Repo has a frontend / wallet / backend signer | Blind signing, SIWS auth/replay, RPC-trust, relayer key custody, durable-nonce abuse |
 
 Each branch file is self-contained: the *check*, the *real exploit it maps to*, the *exact
 question to ask*, the *recommended default*, and *how to verify it in code*.
+
+Branch 9 covers only the **Solana-specific** client↔chain seam; general web2/infra security
+(secrets, deps, CI/CD, OWASP) is handed off to the `cso` skill. For real, sourced precedents to
+cite during the roast, see [exploit-library.md](exploit-library.md).
 
 ---
 
 ## The flow
 
 ```
-0. SCOPE       → Read the program (or the description). Identify which branches apply.
+0. SCOPE       → Read the program (or the description). Identify which branches apply
+                 (1–8 for the program; add 9 if there's a frontend/wallet/backend).
                  State the plan: "I'll roast you across N branches, ~M questions. Ready?"
-1. INTERROGATE → Walk branches 1→8 in dependency order. One question at a time.
+1. INTERROGATE → Walk branches in dependency order. One question at a time.
                  Explore code to self-answer; only ask the human what code can't tell you.
 2. TRIAGE      → Maintain the findings ledger (severity + decision + rationale).
-3. EMIT        → Produce the three artifacts (templates/). Offer the audit hand-off.
+3. SCORE       → Compute a Design Safety score (see below) from the triaged findings.
+4. EMIT        → Produce the artifacts (templates/). Offer the audit hand-off.
+5. TEACH (opt) → If the user wants to learn, run /roast-lecture to turn findings into a
+                 sourced lesson (what breaks + the real exploit it mirrors).
 ```
 
 When the user is short on time, ask: **"Full roast, or just CRITICAL/HIGH branches?"** and
 respect the answer.
+
+### Design Safety score
+
+Give a single headline number so progress is legible and shareable. Start at 10 and subtract:
+**−3 per CRITICAL, −2 per HIGH, −1 per MEDIUM, −0.5 per LOW** (floor at 1; a clean applicable
+branch with zero findings adds nothing but isn't penalized). State it as `Design Safety: X/10`
+with the severity counts, and **always** caveat that a high score reflects *design* risk only —
+it is not an audit pass.
 
 ---
 
@@ -114,6 +131,9 @@ respect the answer.
    ([templates/threat-model.template.md](templates/threat-model.template.md))
 3. **`pre-audit-checklist.md`** — a checked-off list an external auditor (or the kit's audit
    skills) can pick up cold. ([templates/pre-audit-checklist.template.md](templates/pre-audit-checklist.template.md))
+4. **`lecture.md`** *(optional, via `/roast-lecture`)* — a teaching pass: each finding explained,
+   what breaks if unfixed, and the real exploit it mirrors (from `exploit-library.md`). For teams
+   who want to *learn*, not just patch. ([templates/lecture.template.md](templates/lecture.template.md))
 
 Write these to `.solana-roast/` in the user's project (create it if missing) so they persist
 and so a later session can resume.

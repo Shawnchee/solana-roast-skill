@@ -5,6 +5,11 @@
 >
 > Date: <YYYY-MM-DD> · Branches run: <list> · Findings: <C>/<H>/<M>/<L>
 
+## Design Safety: <X>/10
+
+Computed from 10 − (3·CRITICAL + 2·HIGH + 1·MEDIUM + 0.5·LOW), floored at 1. **A high score
+reflects reduced *design* risk only — it is not an audit pass.**
+
 ## Severity Summary
 
 | Severity | Count | Accepted (will fix) | Deferred | Won't fix (risk accepted) |

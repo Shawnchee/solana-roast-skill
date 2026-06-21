@@ -47,25 +47,31 @@ artifacts the auditors want as input.
 1. **Reads your program first.** It explores the codebase (`Anchor.toml`, `programs/*/src`,
    `#[derive(Accounts)]`, CPIs, math, token usage) and answers what it can from the code — so it
    never wastes your time asking what the code already shows.
-2. **Roasts you, one question at a time**, down 8 branches in dependency order:
+2. **Roasts you, one question at a time**, down 9 branches in dependency order:
 
    | # | Branch | Catches |
    |---|--------|---------|
-   | 1 | Accounts & PDAs | account substitution, missing owner check, non-canonical bump, PDA sharing |
-   | 2 | Authority & Signers | missing `is_signer` (Wormhole class), authority confusion, missing `has_one` |
+   | 1 | Accounts & PDAs | account substitution, missing owner check, user-supplied bump, PDA sharing |
+   | 2 | Authority & Signers | missing `is_signer`, authority confusion, missing `has_one` |
    | 3 | CPI & Composability | arbitrary CPI, unverified program ID, signer propagation, reentrancy |
    | 4 | State & Data | type cosplay, re-init attacks, close/revival, realloc safety |
    | 5 | Economic Invariants | overflow, rounding leaks, share-inflation, oracle/slippage abuse |
    | 6 | Upgrade & Governance | live upgrade key, single-key admin, multisig/timelock gaps |
    | 7 | Compute & DoS | unbounded loops, fund-locking growth, tx-size limits, rent griefing |
-   | 8 | Tokens (SPL/Token-2022) | mint/freeze authority, ATA spoofing, transfer fees & hooks |
+   | 8 | Tokens (SPL/Token-2022) | mint/freeze authority, ATA spoofing, transfer fees & hooks, permanent delegate |
+   | 9 | Client & Integration | blind signing, SIWS replay/phishing, RPC trust, relayer keys, durable-nonce abuse |
 
-   Every question ends with a **recommended answer** and a one-line *why*, so you can keep moving.
-3. **Triages findings** by severity (CRITICAL/HIGH/MEDIUM/LOW) into a running ledger.
-4. **Emits three artifacts** into `.solana-roast/`:
+   Branches 1–8 roast the on-chain program; branch 9 adds the Solana-specific client↔chain seam
+   (generic web2/infra → handed off to `cso`). Every question ends with a **recommended answer**.
+3. **Triages findings** by severity into a running ledger, and gives a headline **Design Safety
+   score** (`X/10`) so progress is legible — caveated as *design* risk, not an audit pass.
+4. **Emits artifacts** into `.solana-roast/`:
    - `design-spec.md` — the resolved design (account model, PDA map, access matrix, invariants).
-   - `threat-model.md` — every finding, severity, decision, residual risk.
+   - `threat-model.md` — every finding, severity, decision, residual risk, the score.
    - `pre-audit-checklist.md` — a checked-off list an external auditor can pick up cold.
+   - `lecture.md` *(optional, `/roast-lecture`)* — **teaches** each finding: what breaks if
+     unfixed + the real exploit it mirrors (e.g. *"that's the Cashio bug, $52M"*), so your team
+     learns, not just patches. Grounded in a verified [exploit library](skill/exploit-library.md).
 5. **Hands off** to the right next gate (scanner → audit → formal verification → devnet → mainnet).
 
 It is honest about its scope: it **reduces design risk and produces a triaged checklist** — it is
@@ -125,6 +131,7 @@ it only copies this repo's files.
 - **Natural language:** "roast my Solana program", "review my program design", "threat model
   this", "am I missing any signer checks", "is this safe to deploy".
 - **Command:** `/roast [path-to-program]` — start. `/roast-resume` — continue a saved session.
+  `/roast-lecture` — turn the findings into a teaching lecture (what breaks + the real exploit).
 - **Agent:** delegate a full self-driving review to the `solana-design-interrogator` agent.
 
 ## Structure
@@ -134,12 +141,14 @@ solana-roast-skill/
 ├── skill/
 │   ├── SKILL.md                       # entry/router — progressive loading
 │   ├── interrogation-protocol.md      # how to run the roast
-│   ├── branches/01..08-*.md           # the 8 decision-tree branches
-│   └── templates/                     # design-spec / threat-model / pre-audit-checklist
+│   ├── branches/01..09-*.md           # the 9 decision-tree branches
+│   ├── exploit-library.md             # verified real Solana hacks, mapped to branches
+│   └── templates/                     # design-spec / threat-model / pre-audit-checklist / lecture
 ├── agents/solana-design-interrogator.md, openai.yaml
-├── commands/roast.md, roast-resume.md
+├── commands/roast.md, roast-resume.md, roast-lecture.md
 ├── rules/interrogation-rules.md
 ├── examples/vulnerable-vault/         # intentionally-vulnerable demo + sample roast output
+├── SOURCES.md                         # per-branch primary sources (no-guessing policy)
 ├── install.sh, install-custom.sh
 ├── LICENSE (MIT)
 └── README.md

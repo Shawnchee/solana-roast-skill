@@ -1,0 +1,11 @@
+# solana-roast working output (generated per-project when the skill runs)
+.solana-roast/
+
+# OS / editor
+.DS_Store
+*.swp
+.idea/
+.vscode/
+
+# Node (in case examples are added)
+node_modules/

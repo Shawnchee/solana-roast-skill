@@ -143,12 +143,12 @@ solana-roast-skill/
 │   ├── interrogation-protocol.md      # how to run the roast
 │   ├── branches/01..09-*.md           # the 9 decision-tree branches
 │   ├── exploit-library.md             # verified real Solana hacks, mapped to branches
+│   ├── SOURCES.md                     # per-branch primary sources (no-guessing policy)
 │   └── templates/                     # design-spec / threat-model / pre-audit-checklist / lecture
 ├── agents/solana-design-interrogator.md, openai.yaml
 ├── commands/roast.md, roast-resume.md, roast-lecture.md
 ├── rules/interrogation-rules.md
 ├── examples/vulnerable-vault/         # intentionally-vulnerable demo + sample roast output
-├── SOURCES.md                         # per-branch primary sources (no-guessing policy)
 ├── install.sh, install-custom.sh
 ├── LICENSE (MIT)
 └── README.md
@@ -175,7 +175,7 @@ they consume, at the design stage they can't reach.
 ## Sources & grounding
 
 Every check traces to a primary, authoritative source. The full per-branch mapping lives in
-**[SOURCES.md](SOURCES.md)** (and each branch file links to it); the skill is instructed not to
+**[SOURCES.md](skill/SOURCES.md)** (and each branch file links to it); the skill is instructed not to
 assert anything it can't ground there or in a newer official source. Headline references:
 - [Helius — A Hitchhiker's Guide to Solana Program Security](https://www.helius.dev/blog/a-hitchhikers-guide-to-solana-program-security)
 - [Zealynx — Solana Security Guide: 45 Exploit Checks](https://www.zealynx.io/blogs/solana-security-checklist)

@@ -106,4 +106,4 @@ risk profile regardless of how clean the code is.
 
 ---
 
-**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.
+**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.

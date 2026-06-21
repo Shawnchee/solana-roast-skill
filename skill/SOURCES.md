@@ -90,7 +90,7 @@ Solana 3.x, mid-2026).
 ## Exploit library (teaching precedents)
 
 Full table with amounts, dates, root causes, and branch mapping in
-[skill/exploit-library.md](skill/exploit-library.md). Primary sources per entry:
+[exploit-library.md](exploit-library.md). Primary sources per entry:
 - Wormhole — https://www.halborn.com/blog/post/explained-the-wormhole-hack-february-2022
 - Cashio — https://www.halborn.com/blog/post/explained-the-cashio-hack-march-2022
 - Crema Finance — https://www.coindesk.com/tech/2022/07/04/solana-defi-protocol-crema-loses-88m-in-exploit

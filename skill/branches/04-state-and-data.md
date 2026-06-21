@@ -139,4 +139,4 @@ HIGH — they reset authority and are favorites of attackers.
 
 ---
 
-**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.
+**Sources:** the primary references behind every check in this branch are listed in [SOURCES.md](../SOURCES.md). Do not assert a claim that isn't grounded there (or in a newer official source) — flag it instead.

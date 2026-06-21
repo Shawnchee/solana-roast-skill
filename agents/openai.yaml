@@ -1,0 +1,4 @@
+interface:
+  display_name: "Solana Roast"
+  short_description: "Adversarial pre-ship design & security interrogation for Solana programs"
+  default_prompt: "Roast my Solana program's design and security before I audit it. Read my Anchor/native code, then interrogate the design one question at a time across accounts/PDAs, authority/signers, CPI, state, economic invariants, governance, compute/DoS, and tokens — recommend an answer for each, and produce a design-spec, threat-model, and pre-audit checklist."

@@ -4,8 +4,8 @@
 > bug class is, what breaks if it ships, and the real exploit it mirrors. Sourced from the skill's
 > exploit-library.md / SOURCES.md.
 
-**Design Safety: 1/10** — 5 CRITICAL, 2 HIGH, 1 MEDIUM. (Score floors at 1; this program is
-trivially drainable as written.)
+**Code Safety: 1/10 · Launch Readiness: 8/10** — 5 CRITICAL, 2 HIGH, 1 MEDIUM. The catastrophe is
+in the *code*, not the launch posture; both scores floor at 1, and neither is an audit pass.
 
 ## What this program does (and where the risk is)
 

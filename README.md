@@ -63,8 +63,10 @@ artifacts the auditors want as input.
 
    Branches 1–8 roast the on-chain program; branch 9 adds the Solana-specific client↔chain seam
    (generic web2/infra → handed off to `cso`). Every question ends with a **recommended answer**.
-3. **Triages findings** by severity into a running ledger, and gives a headline **Design Safety
-   score** (`X/10`) so progress is legible — caveated as *design* risk, not an audit pass.
+3. **Triages findings** by severity into a running ledger, and gives **two** scores —
+   **Code Safety** (`X/10`, program exploitability) and **Launch Readiness** (`Y/10`,
+   governance/operational posture) — so governance gaps don't make clean code look broken, or
+   vice-versa. Both are design-stage risk, not an audit pass.
 4. **Emits artifacts** into `.solana-roast/`:
    - `design-spec.md` — the resolved design (account model, PDA map, access matrix, invariants).
    - `threat-model.md` — every finding, severity, decision, residual risk, the score.

@@ -24,7 +24,7 @@ bug class well enough to never write it again.
    - **The fix** — the corrected code/pattern, and the one-line principle to remember.
 4. **Write it** to `.solana-roast/lecture.md` using the skill's `templates/lecture.template.md`.
    Keep it skimmable: headings, short paragraphs, real code.
-5. **Open with the Design Safety score** (from the threat-model) and a one-paragraph "what this
+5. **Open with the two scores** (Code Safety + Launch Readiness, from the threat-model) and a one-paragraph "what this
    program is trying to do and where its risk concentrates."
 6. **Close** with the 3 principles that would have prevented the most findings, and the hand-off
    (scanner → audit → formal verification).

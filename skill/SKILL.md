@@ -102,8 +102,8 @@ cite during the roast, see [exploit-library.md](exploit-library.md).
                  State the plan: "I'll roast you across N branches, ~M questions. Ready?"
 1. INTERROGATE → Walk branches in dependency order. One question at a time.
                  Explore code to self-answer; only ask the human what code can't tell you.
-2. TRIAGE      → Maintain the findings ledger (severity + decision + rationale).
-3. SCORE       → Compute a Design Safety score (see below) from the triaged findings.
+2. TRIAGE      → Maintain the findings ledger (severity + decision + rationale + dimension).
+3. SCORE       → Compute the two scores (see below) from the triaged findings.
 4. EMIT        → Produce the artifacts (templates/). Offer the audit hand-off.
 5. TEACH (opt) → If the user wants to learn, run /roast-lecture to turn findings into a
                  sourced lesson (what breaks + the real exploit it mirrors).
@@ -112,13 +112,28 @@ cite during the roast, see [exploit-library.md](exploit-library.md).
 When the user is short on time, ask: **"Full roast, or just CRITICAL/HIGH branches?"** and
 respect the answer.
 
-### Design Safety score
+### Two scores: Code Safety + Launch Readiness
 
-Give a single headline number so progress is legible and shareable. Start at 10 and subtract:
-**−3 per CRITICAL, −2 per HIGH, −1 per MEDIUM, −0.5 per LOW** (floor at 1; a clean applicable
-branch with zero findings adds nothing but isn't penalized). State it as `Design Safety: X/10`
-with the severity counts, and **always** caveat that a high score reflects *design* risk only —
-it is not an audit pass.
+Do **not** collapse everything into one number — a single score lets governance/process gaps
+make otherwise-clean code look broken (and vice-versa). Report **two** independent scores so the
+user sees *which kind* of risk they have.
+
+Classify every finding into one dimension (default by the branch it came from; reclassify a
+specific finding when it's clearly the other kind — e.g. "no key-recovery path" is *launch* even
+though it surfaced near authority):
+
+| Dimension | "Can the program itself be exploited?" / "Is it safe to ship & operate?" | Branches |
+|-----------|--------------------------------------------------------------------------|----------|
+| **Code Safety** | Exploitable defects in the on-chain program — missing signer, account substitution, bad PDA, overflow, oracle, fund-locking DoS, token validation, broken logic | 1, 2, 3, 4, 5, 7, 8 |
+| **Launch Readiness** | Operational/governance posture that gates safe deployment — upgrade-authority custody, admin blast radius, multisig/timelock, key recovery/rotation, pause, monitoring, and the client↔chain seam | 6, 9, + process findings |
+
+Each score: start at **10**, subtract **−3 per CRITICAL, −2 per HIGH, −1 per MEDIUM, −0.5 per LOW**
+*within that dimension*, floor at **1**. A dimension whose branches were genuinely not applicable
+is **n/a** (not 10 — don't imply coverage you didn't do).
+
+State both, e.g. `Code Safety: 7/10 · Launch Readiness: 6/10`, with the per-dimension counts.
+**Always** caveat: these reflect *design-stage* risk only — a high score is not an audit pass.
+A clean Code Safety with a low Launch Readiness (or the reverse) is the common, useful result.
 
 ---
 

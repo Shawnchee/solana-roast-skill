@@ -4,7 +4,8 @@
 > class is, what breaks if it ships, and the real exploit it mirrors. Learn it once, never write it
 > again. Sourced from the skill's exploit-library.md / SOURCES.md.
 
-**Design Safety: <X>/10** — <C> CRITICAL, <H> HIGH, <M> MEDIUM, <L> LOW.
+**Code Safety: <X>/10 · Launch Readiness: <Y>/10** — <C> CRITICAL, <H> HIGH, <M> MEDIUM, <L> LOW
+(design-stage risk, not an audit pass).
 
 ## What this program does (and where the risk is)
 

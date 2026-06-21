@@ -5,27 +5,33 @@
 >
 > Date: <YYYY-MM-DD> · Branches run: <list> · Findings: <C>/<H>/<M>/<L>
 
-## Design Safety: <X>/10
+## Scores
 
-Computed from 10 − (3·CRITICAL + 2·HIGH + 1·MEDIUM + 0.5·LOW), floored at 1. **A high score
-reflects reduced *design* risk only — it is not an audit pass.**
+> **Code Safety: <X>/10 · Launch Readiness: <Y>/10**
+
+Two independent scores so governance gaps don't mask clean code (or vice-versa). Each: start at
+10, subtract −3·CRITICAL / −2·HIGH / −1·MEDIUM / −0.5·LOW *within that dimension*, floor at 1;
+`n/a` if that dimension's branches didn't apply. **Design-stage risk only — not an audit pass.**
+
+- **Code Safety** (program exploitability — branches 1,2,3,4,5,7,8): `<C>/<H>/<M>/<L>` → **<X>/10**
+- **Launch Readiness** (governance/operational posture — branches 6, 9, + process): `<C>/<H>/<M>/<L>` → **<Y>/10**
 
 ## Severity Summary
 
-| Severity | Count | Accepted (will fix) | Deferred | Won't fix (risk accepted) |
-|----------|-------|---------------------|----------|---------------------------|
-| CRITICAL | | | | |
-| HIGH | | | | |
-| MEDIUM | | | | |
-| LOW | | | | |
+| Severity | Count | Code Safety | Launch Readiness | Accepted | Deferred | Won't fix |
+|----------|-------|-------------|------------------|----------|----------|-----------|
+| CRITICAL | | | | | | |
+| HIGH | | | | | | |
+| MEDIUM | | | | | | |
+| LOW | | | | | | |
 
 ## Findings Ledger
 
-| ID | Branch | Severity | Finding | Exploit class | Decision | Status |
-|----|--------|----------|---------|---------------|----------|--------|
-| F-01 | authority | CRITICAL | `withdraw` authority is `AccountInfo`, never signs | Wormhole / missing-signer | switch to `Signer` + `has_one` | accepted |
-| F-02 | pdas | HIGH | bump re-derived per ix, not stored | non-canonical bump | store + reuse canonical bump | accepted |
-| F-03 | economic | MEDIUM | fee math rounds toward user | rounding leak | round toward protocol | accepted |
+| ID | Branch | Dimension | Severity | Finding | Exploit class | Decision | Status |
+|----|--------|-----------|----------|---------|---------------|----------|--------|
+| F-01 | authority | code | CRITICAL | `withdraw` authority is `AccountInfo`, never signs | missing-signer | switch to `Signer` + `has_one` | accepted |
+| F-02 | pdas | code | HIGH | user-supplied bump argument | non-canonical bump | use canonical `bump` | accepted |
+| F-03 | governance | launch | HIGH | upgrade authority is a single hot key | upgrade-key rug | Squads v4 multisig + timelock | accepted |
 
 ## Detailed Findings
 

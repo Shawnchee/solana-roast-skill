@@ -5,32 +5,37 @@
 >
 > Date: 2026-06-21 · Branches run: 1,2,3,4,5,6,8 (9 N/A — no frontend) · Findings: 5 CRITICAL / 2 HIGH / 1 MEDIUM
 
-## Design Safety: 1/10
+## Scores
 
-10 − (3·5 + 2·2 + 1·1) = −10, floored at 1. Trivially drainable as written — see the lecture for
-why. **A high score would reflect reduced *design* risk only; it is never an audit pass.**
+> **Code Safety: 1/10 · Launch Readiness: 8/10**
+
+- **Code Safety** (branches 1,2,3,4,5,8 — F-01..05, F-07, F-08): 5 CRITICAL / 1 HIGH / 1 MEDIUM → 10 − (3·5 + 2·1 + 1·1), floored at **1/10**. Trivially drainable as written — see the lecture.
+- **Launch Readiness** (branch 6 — F-06): 1 HIGH (upgradeable, no documented authority plan) → 10 − 2 = **8/10**.
+
+The split is the point: this program's catastrophe is its **code**, not its launch posture — the
+inverse of a program that's clean but governance-gapped. Never an audit pass.
 
 ## Severity Summary
 
-| Severity | Count | Accepted (will fix) | Deferred | Won't fix |
-|----------|-------|---------------------|----------|-----------|
-| CRITICAL | 5 | 5 | 0 | 0 |
-| HIGH | 2 | 2 | 0 | 0 |
-| MEDIUM | 1 | 1 | 0 | 0 |
-| LOW | 0 | — | — | — |
+| Severity | Count | Code Safety | Launch Readiness | Accepted | Deferred | Won't fix |
+|----------|-------|-------------|------------------|----------|----------|-----------|
+| CRITICAL | 5 | 5 | 0 | 5 | 0 | 0 |
+| HIGH | 2 | 1 | 1 | 2 | 0 | 0 |
+| MEDIUM | 1 | 1 | 0 | 1 | 0 | 0 |
+| LOW | 0 | — | — | — | — | — |
 
 ## Findings Ledger
 
-| ID | Branch | Severity | Finding | Exploit class | Decision | Status |
-|----|--------|----------|---------|---------------|----------|--------|
-| F-01 | authority | CRITICAL | `withdraw.authority` is `UncheckedAccount`, not a `Signer`, not bound to `vault.authority` | missing-signer / auth bypass | `Signer` + `has_one = authority` | accepted |
-| F-02 | cpi | CRITICAL | `withdraw.token_program` unverified → arbitrary CPI | arbitrary CPI | typed `Interface<TokenInterface>` | accepted |
-| F-03 | tokens | CRITICAL | token accounts lack `token::mint`/`token::authority` constraints | token-account substitution | constrain mint + authority | accepted |
-| F-04 | economic | CRITICAL | unchecked `+`/`-` on `total_deposited`; withdraw underflows | integer overflow/underflow | `checked_*` + `require!(amount<=total)` | accepted |
-| F-07 | economic | CRITICAL | `overflow-checks = false` in release (enables F-04) | overflow (process) | set `overflow-checks = true` | accepted |
-| F-05 | accounts/pdas | HIGH | bump taken as instruction argument | non-canonical bump | use Anchor bare `bump` / stored canonical | accepted |
-| F-06 | governance | HIGH | upgradeable with no documented authority plan | upgrade-key rug | Squads v4 multisig + timelock | accepted |
-| F-08 | tokens | MEDIUM | deposit credits requested amount, not actual delta (Token-2022 fee mints) | fee-on-transfer over-credit | credit balance delta / allow-list mints | accepted |
+| ID | Branch | Dimension | Severity | Finding | Exploit class | Decision | Status |
+|----|--------|-----------|----------|---------|---------------|----------|--------|
+| F-01 | authority | code | CRITICAL | `withdraw.authority` is `UncheckedAccount`, not a `Signer`, not bound to `vault.authority` | missing-signer / auth bypass | `Signer` + `has_one = authority` | accepted |
+| F-02 | cpi | code | CRITICAL | `withdraw.token_program` unverified → arbitrary CPI | arbitrary CPI | typed `Interface<TokenInterface>` | accepted |
+| F-03 | tokens | code | CRITICAL | token accounts lack `token::mint`/`token::authority` constraints | token-account substitution | constrain mint + authority | accepted |
+| F-04 | economic | code | CRITICAL | unchecked `+`/`-` on `total_deposited`; withdraw underflows | integer overflow/underflow | `checked_*` + `require!(amount<=total)` | accepted |
+| F-07 | economic | code | CRITICAL | `overflow-checks = false` in release (enables F-04) | overflow (process) | set `overflow-checks = true` | accepted |
+| F-05 | accounts/pdas | code | HIGH | bump taken as instruction argument | non-canonical bump | use Anchor bare `bump` / stored canonical | accepted |
+| F-06 | governance | launch | HIGH | upgradeable with no documented authority plan | upgrade-key rug | Squads v4 multisig + timelock | accepted |
+| F-08 | tokens | code | MEDIUM | deposit credits requested amount, not actual delta (Token-2022 fee mints) | fee-on-transfer over-credit | credit balance delta / allow-list mints | accepted |
 
 ## Detailed Findings
 

@@ -118,10 +118,10 @@ F-03  | economic        | MEDIUM   | fee math rounds down, leaks 1 lamport    | 
 Don't start roasting cold. Open with scope so the user knows the shape:
 
 > "I read your program (`programs/vault/src/`). It's an Anchor vault that moves SPL tokens
-> and is upgradeable. I'll roast you across 6 of the 8 branches — accounts/PDAs, authority,
-> CPI, state, economic invariants, and governance — skipping the token-2022 and pure-compute
-> ones since they don't apply. Roughly 18 questions. I already spotted 2 likely CRITICALs
-> while reading. Full roast, or CRITICAL/HIGH only?"
+> and is upgradeable. I'll roast you across 7 of the 9 branches — accounts/PDAs, authority,
+> CPI, state, economic invariants, governance, and tokens — skipping the pure-compute and
+> client branches since they don't apply. Roughly 18 questions. I already spotted 2 likely
+> CRITICALs while reading. Full roast, or CRITICAL/HIGH only?"
 
 Then go one question at a time.
 

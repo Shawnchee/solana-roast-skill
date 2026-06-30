@@ -85,7 +85,8 @@ It is honest about its scope: it **reduces design risk and produces a triaged ch
 You: roast my program
 
 roast: I read programs/vault/src/. It's an upgradeable Anchor vault moving SPL tokens.
-       I'll roast 6 of 8 branches (~18 Qs). I already spotted 2 likely CRITICALs.
+       I'll roast 7 of 9 branches (~18 Qs) — skipping pure-compute and client, which
+       don't apply here. I already spotted 2 likely CRITICALs.
        Full roast, or CRITICAL/HIGH only?
 
 You: full
@@ -178,7 +179,14 @@ they consume, at the design stage they can't reach.
 
 Every check traces to a primary, authoritative source. The full per-branch mapping lives in
 **[SOURCES.md](skill/SOURCES.md)** (and each branch file links to it); the skill is instructed not to
-assert anything it can't ground there or in a newer official source. Headline references:
+assert anything it can't ground there or in a newer official source.
+
+This repo holds itself to the standard it enforces: it is **injection-clean** — no hidden
+instructions, no reviewer-manipulation, no invisible text in any file an agent ingests. It's a
+verifiable property, checked by the codepoint scan in [AGENTS.md](AGENTS.md).
+A security tool that smuggles a hidden directive has already failed its own first check.
+
+Headline references:
 - [Helius — A Hitchhiker's Guide to Solana Program Security](https://www.helius.dev/blog/a-hitchhikers-guide-to-solana-program-security)
 - [Zealynx — Solana Security Guide: 45 Exploit Checks](https://www.zealynx.io/blogs/solana-security-checklist)
 - [Solana Program Security Checklist: 14 Critical Checks Before Mainnet](https://dev.to/ohmygod/solana-program-security-checklist-14-critical-checks-before-you-deploy-to-mainnet-2d66)
